@@ -21,13 +21,14 @@
   ],
   "devDependencies": {
     "eslint": "^6.6.0",
-    "prettier": "^1.19.1",
-    "husky": "^3.0.9",
-    "lint-staged": "^9.4.3",
     "eslint-config-prettier": "^6.6.0",
-    "eslint-plugin-prettier": "^3.1.1",
     "eslint-config-xo": "^0.27.2",
-    "jest": "^26.1.0"
+    "eslint-plugin-prettier": "^3.1.1",
+    "husky": "^3.0.9",
+    "jest": "^26.1.0",
+    "lint-staged": "^9.4.3",
+    "prettier": "^1.19.1",
+    "signale": "^1.4.0"
   },
   "engines": {
     "npm": ">= 4.0.0"
@@ -65,11 +66,16 @@
   },
   "scripts": {
     "pretest": "eslint .",
-    "test": "jest"
+    "test": "jest",
+    "start": "node lib/index.js"
   },
   "repository": "balmacefa/md_metadata_parser",
   "jest": {
     "testEnvironment": "node"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "match-recursive": "^0.1.1",
+    "weak-type-wizard": "^1.4.0"
+  }
 }
