@@ -76,6 +76,7 @@
   "license": "MIT",
   "dependencies": {
     "match-recursive": "^0.1.1",
-    "weak-type-wizard": "^1.4.0"
+    "weak-type-wizard": "^1.4.0",
+    "yaml": "^1.10.0"
   }
 }
