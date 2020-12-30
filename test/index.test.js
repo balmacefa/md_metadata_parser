@@ -37,7 +37,7 @@ describe("Standard MD parser e2e", () => {
   test("parse Json to MD", () => {
     var mdData = fs.readFileSync(mdStandardFilePath, "utf8");
     var resultTree = mdMetadataParser.parseMd2Json({ mdData });
-    var outputMD = mdMetadataParser.parseJson2Md({ rootNode: resultTree });
+    var outputMD = mdMetadataParser.parseJson2Md({ json: resultTree });
     expect(outputMD).toBe(mdData);
   });
 });
@@ -74,7 +74,7 @@ describe("Custom MD parser e2e", () => {
       endFormatChildren
     });
     var outputMD = mdMetadataParser.parseJson2Md({
-      rootNode: resultTree,
+      json: resultTree,
       startFormatNode,
       endFormatNode,
       startFormatMetadata,
