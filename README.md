@@ -179,7 +179,7 @@ Content 2
 ```
 ## License
 
-MIT © [balmacefa]()
+MIT © [balmacefa](https://github.com/balmacefa)
 
 
 [npm-image]: https://badge.fury.io/js/md_metadata_parser.svg
