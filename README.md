@@ -1,6 +1,12 @@
 # md_metadata_parser [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
-> md metada parser, tree node model
+> md  YAML metada parser
 
+## Motivation
+md_metadata_parser insert [YAML](https://github.com/eemeli/yaml) metadata as Markdown comment.
+
+You can hide metadata to the render consumer, and use the same .md file to store data for later processing - consumption.
+
+md_metadata_parser can parse from md to json and vice versa.
 ## Installation
 
 ```sh
@@ -13,6 +19,163 @@ $ npm install --save md_metadata_parser
 const mdMetadataParser = require('md_metadata_parser');
 
 mdMetadataParser('Rainbow');
+
+var mdData = fs.readFileSync("md_path.md", "utf8");
+
+// parse the md file to json object
+var resultTree = mdMetadataParser.parseMd2Json({ mdData });
+
+// parse the json object to md
+var outputMD = mdMetadataParser.parseJson2Md({ rootNode: resultTree });
+```
+
+# API
+
+## `parseMd2Json({'mdData', ...});`
+parse the md data to json format
+
+| Option | Default value | Description |
+| ------ | ------------- | ----------- |
+| `mdData` | null | The md data to be parse |
+| `startFormatNode` | ``<!-- __NODE_START__  -->`` | Open node tag
+| `endFormatNode` | ``<!-- __NODE_END__  -->`` | Close node tag
+| `startFormatMetadata` | ``<!-- __meta_start__`` | Open metadata tag
+| `endFormatMetadata` | ``__meta_end__ -->`` | Close metadata tag
+| `startFormatContent` | ``<!-- __content_start__ -->`` | Open content tag
+| `endFormatContent` | ``<!-- __content_end__ -->`` | Close content tag
+| `startFormatChildren` | ``<!-- __children_start__ -->`` | Open children tag
+| `endFormatChildren` | ``<!-- __children_end__ -->`` | Close children tag
+
+
+## `parseJson2Md({'json', ...});`
+parse the md data to json format
+
+| Option | Default value | Description |
+| ------ | ------------- | ----------- |
+| `json` | null | (JSON object) The json data to be parse |
+| `startFormatNode` | ``<!-- __NODE_START__  -->`` | Open node tag
+| `endFormatNode` | ``<!-- __NODE_END__  -->`` | Close node tag
+| `startFormatMetadata` | ``<!-- __meta_start__`` | Open metadata tag
+| `endFormatMetadata` | ``__meta_end__ -->`` | Close metadata tag
+| `startFormatContent` | ``<!-- __content_start__ -->`` | Open content tag
+| `endFormatContent` | ``<!-- __content_end__ -->`` | Close content tag
+| `startFormatChildren` | ``<!-- __children_start__ -->`` | Open children tag
+| `endFormatChildren` | ``<!-- __children_end__ -->`` | Close children tag
+
+
+# MD Structure
+
+There are 4 tags for describe the data Structure
+
+### 1. **Node tag**
+`<!-- __NODE_START__  -->`
+
+This will be the **json object** container, all the others tags have to be inside,
+> Everything outside will be ignored.
+
+`<!-- __NODE_END__  -->`
+
+
+### 2. **Metadata tag**
+`<!-- __meta_start__`
+
+This will be parse as [YAML](https://github.com/eemeli/yaml)
+> YAML.parse( content_inside_this_tag )
+
+json attribute: "metadata"
+
+`__meta_end__ -->`
+
+
+### 3. **Content tag**
+`<!-- __content_start__ -->`
+
+This the render md content
+
+json attribute: "content"
+`<!-- __content_end__ -->`
+### 4. **Children tag**
+`<!-- __children_start__ -->`
+
+
+Array of **Node tag**
+
+json attribute: "children"
+
+`<!-- __children_end__ -->`
+
+
+# Example
+## md
+```
+<!-- __NODE_START__  -->
+<!-- __meta_start__
+id: 1
+description: 1111
+date: 2020-12-23T22:38:58.000Z
+
+__meta_end__ -->
+
+<!-- __content_start__ -->
+# Content 1
+Content 1
+<!-- __content_end__ -->
+
+<!-- __children_start__ -->
+
+      <!-- __NODE_START__  -->
+      <!-- __meta_start__
+      id: 01a
+      description: 1a
+      
+      __meta_end__ -->
+      <!-- __content_start__ -->
+      Content 1a
+      <!-- __content_end__ -->
+      
+      <!-- __NODE_END__  -->
+
+<!-- __children_end__ -->
+
+<!-- __NODE_END__  -->
+
+
+<!-- __NODE_START__  -->
+<!-- __meta_start__
+id: 2
+description: 2222
+
+__meta_end__ -->
+
+<!-- __content_start__ -->
+## Content 2
+Content 2
+<!-- __content_end__ -->
+
+<!-- __NODE_END__  -->
+
+```
+## json
+```
+[
+  {
+    "metadata": {
+      "id": 1,
+      "description": 1111,
+    },
+    "content": "# Content 1\nContent 1",
+    "children": [
+      {
+        "metadata": { "id": "01a", "description": "1a" },
+        "content": "Content 1a"
+      }
+    ]
+  },
+  {
+    "metadata": { "id": 2, "description": 2222 },
+    "content": "## Content 2\nContent 2"
+  },
+]
 ```
 ## License
 
