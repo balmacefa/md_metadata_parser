@@ -1,6 +1,6 @@
 {
   "name": "md_metadata_parser",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "md metada parser, tree node model",
   "homepage": "https://github.com/balmacefa/md_metadata_parser",
   "author": {
