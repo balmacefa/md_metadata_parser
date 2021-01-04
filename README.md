@@ -7,6 +7,26 @@ md_metadata_parser insert [YAML](https://github.com/eemeli/yaml) metadata as Mar
 You can hide metadata to the render consumer, and use the same .md file to store data for later processing - consumption.
 
 md_metadata_parser can parse from md to json and vice versa.
+
+# Table of contents
+
+  * [Installation](#installation)
+  * [Usage](#usage)
+- [Example](#example)
+- [API](#api)
+  * [`parseMd2Json({'mdData', ...});`](#-parsemd2json---mddata-------)
+  * [`parseJson2Md({'json', ...});`](#-parsejson2md---json-------)
+- [Structure](#structure)
+  * [1. Node tag](#1-node-tag)
+  * [2. Metadata tag](#2-metadata-tag)
+  * [3. Content tag](#3-content-tag)
+  * [4. Children tag](#4-children-tag)
+  * [md structure example](#md-structure-example)
+  * [json (parsed from md👆) structure example](#json--parsed-from-md----structure-example)
+  * [License](#license)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
 ## Installation
 
 ```sh
@@ -65,21 +85,21 @@ parse the md data to json format
 | `endFormatChildren` | ``<!-- __children_end__ -->`` | Close children tag
 
 
-# MD Structure
+# Structure
 
 There are 4 tags for describe the data Structure
 
-### 1. **Node tag**
-`<!-- __NODE_START__  -->`
+## 1. Node tag
+md: `<!-- __NODE_START__  -->`
 
 This will be the **json object** container, all the others tags have to be inside,
 > Everything outside will be ignored.
 
-`<!-- __NODE_END__  -->`
+md: `<!-- __NODE_END__  -->`
 
 
-### 2. **Metadata tag**
-`<!-- __meta_start__`
+## 2. Metadata tag
+md: `<!-- __meta_start__`
 
 This will be parse as [YAML](https://github.com/eemeli/yaml)
 > YAML.parse( content_inside_this_tag )
@@ -89,24 +109,25 @@ json attribute: "metadata"
 `__meta_end__ -->`
 
 
-### 3. **Content tag**
-`<!-- __content_start__ -->`
+## 3. Content tag
+md: `<!-- __content_start__ -->`
 
 This the render md content
 
 json attribute: "content"
-`<!-- __content_end__ -->`
-### 4. **Children tag**
-`<!-- __children_start__ -->`
+
+md: `<!-- __content_end__ -->`
+## 4. Children tag
+md: `<!-- __children_start__ -->`
 
 
 Array of **Node tag**
 
 json attribute: "children"
 
-`<!-- __children_end__ -->`
+md: `<!-- __children_end__ -->`
 
-## md
+## md structure example
 ```
 <!-- __NODE_START__  -->
 <!-- __meta_start__
@@ -155,7 +176,7 @@ Content 2
 <!-- __NODE_END__  -->
 
 ```
-## json
+## json (parsed from md👆) structure example
 ```
 [
   {
