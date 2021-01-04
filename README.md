@@ -18,8 +18,6 @@ $ npm install --save md_metadata_parser
 ```js
 const mdMetadataParser = require('md_metadata_parser');
 
-mdMetadataParser('Rainbow');
-
 var mdData = fs.readFileSync("md_path.md", "utf8");
 
 // parse the md file to json object
