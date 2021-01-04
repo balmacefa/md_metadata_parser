@@ -27,6 +27,10 @@ var resultTree = mdMetadataParser.parseMd2Json({ mdData });
 var outputMD = mdMetadataParser.parseJson2Md({ rootNode: resultTree });
 ```
 
+# Example
+
+See https://github.com/balmacefa/md_metadata_parser/blob/main/test/index.test.js
+
 # API
 
 ## `parseMd2Json({'mdData', ...});`
@@ -102,10 +106,6 @@ json attribute: "children"
 
 `<!-- __children_end__ -->`
 
-
-# Example
-
-See https://github.com/balmacefa/md_metadata_parser/blob/main/test/index.test.js
 ## md
 ```
 <!-- __NODE_START__  -->
