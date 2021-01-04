@@ -121,13 +121,14 @@ md: `<!-- __content_end__ -->`
 md: `<!-- __children_start__ -->`
 
 
-Array of **Node tag**
+Array of **Node tag** ( recursive )
 
 json attribute: "children"
 
 md: `<!-- __children_end__ -->`
 
-## md structure example
+# Structure example
+## md
 ```
 <!-- __NODE_START__  -->
 <!-- __meta_start__
@@ -176,7 +177,8 @@ Content 2
 <!-- __NODE_END__  -->
 
 ```
-## json (parsed from md👆) structure example
+## json
+(parsed from md👆)
 ```
 [
   {
